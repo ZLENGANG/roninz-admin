@@ -36,4 +36,4 @@ deploy-job:
     - echo $USER
     - scp -r ./dist root@103.143.72.78:/home/nginx/html/vite-vue3-ts-pinia
   only:
-    - main
+    - master
