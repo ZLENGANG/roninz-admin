@@ -12,11 +12,11 @@ export default defineConfig({
   },
   plugins: [vue()],
   server: {
-    port: 1998, //启动端口
-    hmr: {
-      host: '127.0.0.1',
-      port: 1998,
-    },
+    // port: 1998, //启动端口
+    // hmr: {
+    //   host: '127.0.0.1',
+    //   port: 1998,
+    // },
     // 设置 https 代理
     // proxy: {
     //     '/api': {
