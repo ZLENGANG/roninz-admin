@@ -3,3 +3,4 @@
 3. 提交代码：npm run commit
 4. 格式化代码：npm run prettier
 5. eslint：npm run eslint
+6. 构建：npm run build
