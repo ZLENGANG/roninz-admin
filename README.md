@@ -5,3 +5,4 @@
 5. eslint：npm run eslint
 6. 构建：npm run build
 7. 代码提交规范
+8. 测试
