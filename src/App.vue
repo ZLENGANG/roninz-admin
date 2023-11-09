@@ -119,11 +119,14 @@ import {
   NFormItemGi,
   NGrid,
   NButton,
+  FormRules,
 } from 'naive-ui';
+
+import { Size } from 'naive-ui/es/form/src/interface';
 
 const formRef = ref<FormInst | null>(null);
 
-const size = ref('medium');
+const size = ref<Size>('medium');
 
 const model = ref({
   inputValue: null,
@@ -150,7 +153,7 @@ const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map((v) 
   value: v,
 }));
 
-const rules = {
+const rules = ref<FormRules>({
   inputValue: {
     required: true,
     trigger: ['blur', 'input'],
@@ -231,7 +234,7 @@ const rules = {
     trigger: 'change',
     message: '请输入 transferValue',
   },
-};
+});
 
 const handleValidateButtonClick = (e: MouseEvent) => {
   e.preventDefault();
