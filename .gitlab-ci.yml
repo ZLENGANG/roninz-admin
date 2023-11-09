@@ -34,6 +34,6 @@ deploy-job:
   stage: deploy
   script:
     - echo $USER
-    - scp -r ./dist root@103.143.72.78:/home/nginx/html/vite-vue3-ts-pinia
+    - sshpass -p zl541442B scp -r ./dist/* root@103.143.72.78:/usr/local/nginx/html/vite-vue3-ts-pinia
   only:
     - master
