@@ -1,8 +1,8 @@
 {
   "recommendations": [
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "Vue.vscode-typescript-vue-plugin",
+    "esbenp.prettier-vscode",  // prettier美化代码
+    "dbaeumer.vscode-eslint", // eslint保证代码质量
+    "Vue.vscode-typescript-vue-plugin", // TypeScript Vue Plugin (Volar) 解决typescript 只能理解 .ts 文件，无法理解 .vue文件问题
     "Vue.volar"
   ]
 }
