@@ -7,7 +7,7 @@ const count = ref(0);
 </script>
 
 <template>
-  <h1>{{ msg }}666啊zl哈哈哈</h1>
+  <h1>{{ msg }}测试gitlab cicd</h1>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
