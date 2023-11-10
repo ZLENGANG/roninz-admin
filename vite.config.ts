@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
+import { createVitePlugins } from './build/plugins/index';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +11,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  plugins: [vue()],
+  plugins: [createVitePlugins()],
   server: {
     // port: 1998, //启动端口
     // hmr: {
