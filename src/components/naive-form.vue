@@ -123,11 +123,11 @@ import {
   useMessage,
 } from 'naive-ui';
 
-import { Size } from 'naive-ui/es/form/src/interface';
+// import { Size } from 'naive-ui/es/form/src/interface';
 
 const formRef = ref<FormInst | null>(null);
 
-const size = ref<Size>('medium');
+const size = ref('medium');
 
 const message = useMessage();
 
