@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
-import * as path from 'path';
 import { createVitePlugins } from './build/plugins/index';
+import { getRootPath, getSrcPath } from './build';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
@@ -9,7 +9,9 @@ export default defineConfig(() => {
     resolve: {
       //设置别名
       alias: {
-        '@': path.resolve(__dirname, 'src'),
+        '~': getRootPath(),
+        '@': getSrcPath(),
+        '#': getSrcPath('types'),
       },
     },
     plugins: [createVitePlugins()],

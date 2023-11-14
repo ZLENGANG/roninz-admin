@@ -4,11 +4,7 @@ import { createDiscreteApi } from 'naive-ui';
 
 const { message: $message } = createDiscreteApi(['message']);
 
-interface RequestConfig extends InternalAxiosRequestConfig {
-  noNeedTip?: boolean;
-}
-
-export function reqResolve(config: RequestConfig) {
+export function reqResolve(config: InternalAxiosRequestConfig) {
   return config;
 }
 
@@ -35,6 +31,7 @@ export const resReject = (error: any) => {
     return Promise.reject({ code, message, error });
   }
   const { data, status, config } = error.response;
+  console.log(config, 'config');
 
   const code = data?.code ?? status;
   const message = resolveResError(code, data?.message ?? error.message);
