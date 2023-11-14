@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { login } from '@/api/auth';
+import { login } from '@/service';
 
 login({
   name: 'admin',
