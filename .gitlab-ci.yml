@@ -26,7 +26,7 @@ build-job:
   script:
     - npm run build:prod
   only:
-    - master
+    - master | dev | uat
 
 deploy-job:
   tags:
