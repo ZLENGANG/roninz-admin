@@ -18,6 +18,8 @@ install-job:
     - npm install
   only:
     - master
+    - dev
+    - uat
 
 build-job:
   tags:
@@ -27,8 +29,6 @@ build-job:
     - npm run build:prod
   only:
     - master
-    - dev
-    - uat
 
 deploy-job:
   tags:
