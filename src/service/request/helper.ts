@@ -1,4 +1,5 @@
-type RespCode = 400 | 401 | 403 | 404 | 500 | -1;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type RespCode = 400 | 401 | 403 | 404 | 500 | -1 | any;
 
 export function resolveResError(code: RespCode, message: string) {
   switch (code) {
