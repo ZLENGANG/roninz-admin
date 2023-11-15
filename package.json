@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:dev": "vite build --mode dev",
+    "build:uat": "vite build --mode uat",
+    "build:prod": "vite build --mode prod",
     "preview": "vite preview",
     "eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "prettier": "prettier --write .",
@@ -22,6 +24,8 @@
     ]
   },
   "dependencies": {
+    "@unocss/preset-rem-to-px": "^0.57.3",
+    "axios": "^1.6.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
@@ -45,6 +49,7 @@
     "naive-ui": "^2.35.0",
     "prettier": "^3.0.3",
     "typescript": "^5.0.2",
+    "unocss": "^0.57.3",
     "vfonts": "^0.0.3",
     "vite": "^4.4.5",
     "vite-plugin-html": "^3.2.0",
