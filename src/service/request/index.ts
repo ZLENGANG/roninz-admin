@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from 'axios';
-import { reqResolve, resReject, resResolve } from './interceptors';
+import { reqReject, reqResolve, resReject, resResolve } from './interceptors';
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   noNeedTip?: boolean;
@@ -16,7 +16,7 @@ export const createAxios = (options: CreateAxiosDefaults = {}): AxiosInstance =>
     ...options,
   });
 
-  service.interceptors.request.use(reqResolve);
+  service.interceptors.request.use(reqResolve, reqReject);
   service.interceptors.response.use(resResolve, resReject);
 
   return service;

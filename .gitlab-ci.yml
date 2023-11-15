@@ -24,7 +24,7 @@ build-job:
     - vite-vue3-ts-pinia-1108
   stage: build
   script:
-    - npm run build
+    - npm run build:prod
   only:
     - master
 
