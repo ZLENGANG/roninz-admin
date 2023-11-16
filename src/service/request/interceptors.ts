@@ -1,10 +1,7 @@
 import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { resolveResError } from './helper';
-import { createDiscreteApi } from 'naive-ui';
 import { BackEndResp } from '#/axios';
 import { hideFullScreenLoading, showFullScreenLoading } from './loading';
-
-const { message: $message } = createDiscreteApi(['message']);
 
 export function reqResolve(config: InternalAxiosRequestConfig) {
   config.loading && showFullScreenLoading();
@@ -39,7 +36,7 @@ export const resReject = (error: AxiosError<BackEndResp>) => {
     // 根据code处理对应的操作，并返回处理后的message
     const message = resolveResError(code, error.message);
 
-    $message.error(message);
+    window.$message?.error(message);
 
     return Promise.reject({ code, message, error });
   }
@@ -49,7 +46,7 @@ export const resReject = (error: AxiosError<BackEndResp>) => {
   const message = resolveResError(code, data?.message ?? error.message);
 
   // 需要错误提醒
-  !config?.noNeedTip && $message.error(message);
+  !config?.noNeedTip && window.$message?.error(message);
 
   return Promise.reject({ code, message, error: error.response?.data || error.response });
 };
