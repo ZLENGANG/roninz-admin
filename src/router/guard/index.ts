@@ -1,6 +1,8 @@
 import type { Router } from 'vue-router';
-import { setupPageLoadingGuard } from './loading';
+import { createPageLoadingGuard } from './loading';
+import { createPageTitleGuard } from './title';
 
 export const setupRouterGuard = (router: Router) => {
-  setupPageLoadingGuard(router);
+  createPageLoadingGuard(router);
+  createPageTitleGuard(router);
 };
