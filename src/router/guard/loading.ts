@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router';
 
-export const setupPageLoadingGuard = (router: Router) => {
+export const createPageLoadingGuard = (router: Router): void => {
   router.beforeEach(() => {
     window.$loadingBar?.start();
   });
