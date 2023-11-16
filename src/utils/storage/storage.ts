@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface StorageConstrutorParams {
   prefixKey?: string;
   storage: Storage;
+}
+
+interface StorageItem<T> {
+  value: T;
+  time?: number;
+  expire?: number | null;
 }
 
 export class MyStorage<T, K> {
@@ -16,17 +23,17 @@ export class MyStorage<T, K> {
     return `${this.prefixKey}_${key}`.toUpperCase();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  set(key: K, value: any, expire?: number) {
-    const stringData = JSON.stringify({
+  set(key: K, value: T, expire?: number) {
+    const data: StorageItem<T> = {
       value,
       time: Date.now(),
-      expire: expire ? Date.now() + expire * 1000 * 60 * 60 * 24 : null,
-    });
+      expire: expire ? Date.now() + expire * 1000 : null,
+    };
+    const stringData = JSON.stringify(data);
     this.storage.setItem(this.getUpperKey(key), stringData);
   }
 
-  getItem(key: K, def: T) {
+  getItem(key: K, def: null = null) {
     const val = this.storage.getItem(this.getUpperKey(key));
     if (!val) {
       return def;
@@ -45,6 +52,11 @@ export class MyStorage<T, K> {
     }
   }
 
+  get(key: K): StorageItem<T>['value'] | undefined {
+    const result: StorageItem<T> | null = this.getItem(key);
+    return result?.value;
+  }
+
   remove(key: K) {
     this.storage.removeItem(this.getUpperKey(key));
   }
@@ -54,9 +66,9 @@ export class MyStorage<T, K> {
   }
 }
 
-export const createStorage = <T, K>({
+export const createStorage = ({
   prefixKey = '',
   storage = sessionStorage,
-}: StorageConstrutorParams): MyStorage<T, K> => {
-  return new MyStorage<T, K>({ prefixKey, storage });
+}: StorageConstrutorParams): MyStorage<any, string> => {
+  return new MyStorage<any, string>({ prefixKey, storage });
 };
