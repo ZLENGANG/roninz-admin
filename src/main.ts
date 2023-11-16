@@ -3,10 +3,12 @@ import 'virtual:uno.css';
 
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router';
+import { setupRouter } from './router';
+import { setupNaiveDiscreteApi } from './utils';
 
 const app = createApp(App);
 
-app.use(router);
+setupNaiveDiscreteApi();
+setupRouter(app);
 
 app.mount('#app');
