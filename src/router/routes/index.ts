@@ -1,6 +1,7 @@
 import '@/views/index/index.vue';
+import { RouteRecordRaw } from 'vue-router';
 
-export const baseRoutes = [
+export const baseRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('@/views/index/index.vue'),
@@ -13,6 +14,7 @@ export const baseRoutes = [
     component: () => import('@/views/login/index.vue'),
     meta: {
       title: '登录',
+      noNeedLogin: true,
     },
   },
   {

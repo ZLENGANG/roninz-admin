@@ -1,4 +1,5 @@
 import '@/styles/reset.css';
+import '@/styles/global.scss';
 import 'virtual:uno.css';
 
 import { createApp } from 'vue';

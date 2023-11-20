@@ -1,9 +1,13 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import { createVitePlugins } from './build/plugins/index';
 import { getRootPath, getSrcPath } from './build';
+import { ViteEnv } from './types/env';
 
 // https://vitejs.dev/config/
-export default defineConfig(() => {
+export default defineConfig(({ command, mode }) => {
+  const env = loadEnv(mode, process.cwd()) as unknown as ViteEnv;
+  const isBuild = command === 'build';
+
   return {
     base: './',
     resolve: {
@@ -14,7 +18,7 @@ export default defineConfig(() => {
         '#': getSrcPath('types'),
       },
     },
-    plugins: [createVitePlugins()],
+    plugins: [createVitePlugins(env, isBuild)],
     server: {
       proxy: {
         '/api/': {
