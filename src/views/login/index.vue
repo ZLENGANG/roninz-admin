@@ -32,6 +32,9 @@
             placeholder="请输入密码"
             type="password"
             class="h-48 items-center text-16"
+            show-password-on="mousedown"
+            :maxlength="20"
+            @keydown.enter="handleLogin"
           >
             <template #prefix>
               <n-icon mr-8>
@@ -81,7 +84,7 @@ const jump = () => {
   router.push('/');
 };
 
-function handleLogin() {
+const handleLogin = () => {
   loading.value = true;
   login(loginInfo.value)
     .then((res) => {
@@ -91,7 +94,7 @@ function handleLogin() {
     .finally(() => {
       loading.value = false;
     });
-}
+};
 </script>
 
 <style></style>
