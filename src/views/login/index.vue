@@ -67,6 +67,8 @@ import appPage from '@/components/common/app-page.vue';
 import { defineComponent, ref } from 'vue';
 import bgImg from '@/assets/images/login_bg.webp';
 import { AccountCircleRound, LockFilled } from '@vicons/material';
+import { useUserStore } from '@/store';
+
 defineComponent({
   appPage,
 });
@@ -79,6 +81,11 @@ const isRemember = ref(false);
 const router = useRouter();
 const loading = ref(false);
 const { VITE_APP_NAME } = import.meta.env;
+const { userInfo } = useUserStore();
+
+setTimeout(() => {
+  console.log(userInfo);
+});
 
 const jump = () => {
   router.push('/');
