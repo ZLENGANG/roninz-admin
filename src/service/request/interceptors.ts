@@ -14,13 +14,17 @@ export function reqReject(error: AxiosError) {
 }
 
 export const resResolve = (response: AxiosResponse) => {
-  const { data, status, statusText } = response;
+  const { data, status, statusText, config } = response;
+
   hideFullScreenLoading();
   if (data?.code !== 0) {
     const code = data?.code ?? status;
 
     // 根据code处理对应的操作，并返回处理后的message
     const message = resolveResError(code, data?.message ?? statusText);
+
+    // 需要错误提醒
+    !config?.noNeedTip && window.$message?.error(message);
 
     return Promise.reject({ code, message, error: data || response });
   }
