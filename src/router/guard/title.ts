@@ -1,13 +1,13 @@
 import { Router } from 'vue-router';
-import { APP_TITLE } from '~/settings';
+const { VITE_APP_NAME } = import.meta.env;
 
 export const createPageTitleGuard = (router: Router) => {
   router.afterEach((to) => {
     const pageTitle = to.meta?.title;
     if (pageTitle) {
-      document.title = `${APP_TITLE} | ${pageTitle}`;
+      document.title = `${VITE_APP_NAME} | ${pageTitle}`;
     } else {
-      document.title = APP_TITLE;
+      document.title = VITE_APP_NAME;
     }
   });
 };

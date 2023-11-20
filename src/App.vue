@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider class="h-full">
+  <n-config-provider class="wh-full">
     <router-view></router-view>
   </n-config-provider>
 </template>
