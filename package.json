@@ -26,16 +26,17 @@
   "dependencies": {
     "@unocss/preset-rem-to-px": "^0.57.3",
     "axios": "^1.6.1",
+    "pinia": "^2.1.7",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
+    "@iconify/json": "^2.2.144",
     "@types/node": "^20.9.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
-    "@vicons/material": "^0.12.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "commitizen": "^4.3.0",
     "commitlint-config-cz": "^0.13.3",
@@ -52,6 +53,9 @@
     "sass": "^1.69.5",
     "typescript": "^5.0.2",
     "unocss": "^0.57.3",
+    "unplugin-auto-import": "^0.16.7",
+    "unplugin-icons": "^0.17.4",
+    "unplugin-vue-components": "^0.25.2",
     "vfonts": "^0.0.3",
     "vite": "^4.4.5",
     "vite-plugin-html": "^3.2.0",
