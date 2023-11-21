@@ -26,7 +26,7 @@
           >
             <template #prefix>
               <n-icon mr-8>
-                <AccountCircleRound class="text-20 opacity-40" />
+                <icon-ep-avatar class="text-20 opacity-40" />
               </n-icon>
             </template>
           </n-input>
@@ -44,7 +44,7 @@
           >
             <template #prefix>
               <n-icon mr-8>
-                <LockFilled class="text-20 opacity-40" />
+                <icon-ep-lock class="text-20 opacity-40" />
               </n-icon>
             </template>
           </n-input>
@@ -65,17 +65,8 @@
 <script lang="ts" setup>
 import { login } from '@/service';
 import { lStorage, setToken } from '@/utils';
-import { NButton, NInput, NIcon, NCheckbox, NForm, NFormItem, FormInst } from 'naive-ui';
-import { useRouter } from 'vue-router';
-import appPage from '@/components/common/app-page.vue';
-import { defineComponent, ref } from 'vue';
 import bgImg from '@/assets/images/login_bg.webp';
-import { AccountCircleRound, LockFilled } from '@vicons/material';
-import { useUserStore } from '@/store';
-
-defineComponent({
-  appPage,
-});
+import { FormInst } from 'naive-ui';
 
 const loginInfo = ref({
   name: '',
