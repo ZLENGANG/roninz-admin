@@ -5,13 +5,19 @@
         <img src="@/assets/images/login_banner.webp" w-full alt="login_banner" />
       </div>
 
-      <div w-320 flex-col px-20 px-35>
-        <h5 f-c-c text-24 font-normal color="#6a6a6a">
+      <n-form
+        ref="loginFormRef"
+        :model="loginInfo"
+        :show-label="false"
+        :rules="loginRules"
+        class="w-320 flex-col px-20 px-35"
+      >
+        <h5 f-c-c text-24 mb-32 font-normal color="#6a6a6a">
           <img src="/resource/logo.png" height="50" rounded-10 class="mr-10" />
           {{ VITE_APP_NAME }}
         </h5>
 
-        <div mt-32>
+        <n-form-item path="name">
           <n-input
             v-model:value="loginInfo.name"
             placeholder="请输入用户名"
@@ -24,15 +30,15 @@
               </n-icon>
             </template>
           </n-input>
-        </div>
+        </n-form-item>
 
-        <div mt-32>
+        <n-form-item path="password">
           <n-input
             v-model:value="loginInfo.password"
             placeholder="请输入密码"
             type="password"
             class="h-48 items-center text-16"
-            show-password-on="mousedown"
+            show-password-on="click"
             :maxlength="20"
             @keydown.enter="handleLogin"
           >
@@ -42,26 +48,24 @@
               </n-icon>
             </template>
           </n-input>
-        </div>
+        </n-form-item>
 
-        <div mt-20>
-          <n-checkbox :checked="isRemember" label="记住我" :on-update:checked="(val: boolean) => (isRemember = val)" />
-        </div>
+        <n-checkbox :checked="isRemember" label="记住我" :on-update:checked="(val: boolean) => (isRemember = val)" />
 
         <div mt-20>
           <n-button h-50 w-full rounded-5 text-16 type="primary" :loading="loading" @click="handleLogin">
             登录
           </n-button>
         </div>
-      </div>
+      </n-form>
     </div>
   </app-page>
 </template>
 
 <script lang="ts" setup>
 import { login } from '@/service';
-import { setToken } from '@/utils';
-import { NButton, NInput, NIcon, NCheckbox } from 'naive-ui';
+import { lStorage, setToken } from '@/utils';
+import { NButton, NInput, NIcon, NCheckbox, NForm, NFormItem, FormInst } from 'naive-ui';
 import { useRouter } from 'vue-router';
 import appPage from '@/components/common/app-page.vue';
 import { defineComponent, ref } from 'vue';
@@ -79,22 +83,58 @@ const isRemember = ref(false);
 const router = useRouter();
 const loading = ref(false);
 const { VITE_APP_NAME } = import.meta.env;
+const loginRules = {
+  name: {
+    required: true,
+    trigger: 'blur',
+    message: '请输入用户名',
+  },
+  password: {
+    required: true,
+    trigger: 'blur',
+    message: '请输入密码',
+  },
+};
+const loginFormRef = ref<FormInst | null>(null);
+
+const initLoginInfo = () => {
+  const info = lStorage.get('loginInfo');
+  const isRe = lStorage.get('isRemember');
+  if (info) {
+    loginInfo.value = info;
+  }
+  isRemember.value = isRe ? true : false;
+};
+
+const setLoginInfo = () => {
+  if (isRemember.value) {
+    lStorage.set('loginInfo', loginInfo.value);
+    lStorage.set('isRemember', isRemember.value);
+  }
+};
 
 const jump = () => {
   router.push('/');
 };
 
 const handleLogin = () => {
-  loading.value = true;
-  login(loginInfo.value)
-    .then((res) => {
-      setToken(res.data.token);
-      jump();
-    })
-    .finally(() => {
-      loading.value = false;
-    });
+  loginFormRef.value?.validate((valid) => {
+    if (!valid) {
+      loading.value = true;
+      login(loginInfo.value)
+        .then((res) => {
+          setToken(res.data.token);
+          setLoginInfo();
+          jump();
+        })
+        .finally(() => {
+          loading.value = false;
+        });
+    }
+  });
 };
+
+initLoginInfo();
 </script>
 
 <style></style>
