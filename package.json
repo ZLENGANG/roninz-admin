@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@unocss/preset-rem-to-px": "^0.57.3",
+    "@vueuse/core": "^10.6.1",
     "axios": "^1.6.1",
     "pinia": "^2.1.7",
     "vue": "^3.3.4",
