@@ -71,6 +71,8 @@ import appPage from '@/components/common/app-page.vue';
 import { defineComponent, ref } from 'vue';
 import bgImg from '@/assets/images/login_bg.webp';
 import { AccountCircleRound, LockFilled } from '@vicons/material';
+import { useUserStore } from '@/store';
+
 defineComponent({
   appPage,
 });

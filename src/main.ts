@@ -5,11 +5,13 @@ import 'virtual:uno.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import { setupRouter } from './router';
+import { setupStore } from './store';
 import { setupNaiveDiscreteApi } from './utils';
 
 const app = createApp(App);
 
 setupNaiveDiscreteApi();
 setupRouter(app);
+setupStore(app);
 
 app.mount('#app');
