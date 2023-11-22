@@ -1,19 +1,13 @@
 <template>
-  <n-config-provider class="wh-full" :theme="isDark ? darkTheme : null">
-    <n-button @click="changeTheme">主题</n-button>
+  <n-config-provider class="wh-full" :theme="appStore.isDark ? darkTheme : null">
+    <theme-warp></theme-warp>
     <router-view></router-view>
   </n-config-provider>
 </template>
 
 <script lang="ts" setup>
-import { useDark, useToggle } from '@vueuse/core';
-
 import { darkTheme } from 'naive-ui';
+import { useAppStore } from '@/store';
 
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
-
-const changeTheme = () => {
-  toggleDark();
-};
+const appStore = useAppStore();
 </script>
