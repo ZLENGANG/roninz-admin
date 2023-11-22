@@ -23,4 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
+/types/components.d.ts
+
 package-lock.json
