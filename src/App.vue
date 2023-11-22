@@ -1,9 +1,13 @@
 <template>
-  <n-config-provider class="wh-full">
+  <n-config-provider class="wh-full" :theme="appStore.isDark ? darkTheme : null">
+    <theme-warp></theme-warp>
     <router-view></router-view>
   </n-config-provider>
 </template>
 
 <script lang="ts" setup>
-import { NConfigProvider } from 'naive-ui';
+import { darkTheme } from 'naive-ui';
+import { useAppStore } from '@/store';
+
+const appStore = useAppStore();
 </script>

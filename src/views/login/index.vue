@@ -1,6 +1,6 @@
 <template>
   <app-page bg-cover :style="{ backgroundImage: `url(${bgImg})` }">
-    <div class="m-auto max-w-700 min-w-345 f-c-c rounded-10 bg-white bg-opacity-60 p-15 card-shadow">
+    <div class="m-auto max-w-700 min-w-345 f-c-c rounded-10 bg-white bg-opacity-60 p-15 card-shadow" dark:bg-dark>
       <div hidden w-380 px-20 py-35 md:block>
         <img src="@/assets/images/login_banner.webp" w-full alt="login_banner" />
       </div>
@@ -12,7 +12,7 @@
         :rules="loginRules"
         class="w-320 flex-col px-20 px-35"
       >
-        <h5 f-c-c text-24 mb-32 font-normal color="#6a6a6a">
+        <h5 color="#6a6a6a" class="dark:color-[#fff] f-c-c text-24 mb-32 font-normal">
           <img src="/resource/logo.png" height="50" rounded-10 class="mr-10" />
           {{ VITE_APP_NAME }}
         </h5>
