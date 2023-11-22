@@ -17,6 +17,7 @@ const appStore = useAppStore();
   height: 50px;
   border-radius: 50%;
   position: fixed;
+  z-index: 1;
   bottom: 50px;
   right: 50px;
   display: flex;
