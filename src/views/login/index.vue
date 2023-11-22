@@ -1,6 +1,6 @@
 <template>
   <app-page bg-cover :style="{ backgroundImage: `url(${bgImg})` }">
-    <div class="m-auto max-w-700 min-w-345 f-c-c rounded-10 bg-white bg-opacity-60 p-15 card-shadow">
+    <div class="m-auto max-w-700 min-w-345 f-c-c rounded-10 bg-white bg-opacity-60 p-15 card-shadow" dark:bg-dark>
       <div hidden w-380 px-20 py-35 md:block>
         <img src="@/assets/images/login_banner.webp" w-full alt="login_banner" />
       </div>
