@@ -10,6 +10,9 @@ declare module 'vue' {
     AppPage: typeof import('./../src/components/common/app-page.vue')['default']
     IconEpAvatar: typeof import('~icons/ep/avatar')['default']
     IconEpLock: typeof import('~icons/ep/lock')['default']
+    IconEpMagicStick: typeof import('~icons/ep/magic-stick')['default']
+    IconEpMoon: typeof import('~icons/ep/moon')['default']
+    IconEpSunny: typeof import('~icons/ep/sunny')['default']
     Loading: typeof import('./../src/components/loading/index.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NCheckbox: typeof import('naive-ui')['NCheckbox']
@@ -20,5 +23,6 @@ declare module 'vue' {
     NInput: typeof import('naive-ui')['NInput']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ThemeWarp: typeof import('./../src/components/common/theme-warp.vue')['default']
   }
 }

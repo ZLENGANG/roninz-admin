@@ -12,7 +12,7 @@
         :rules="loginRules"
         class="w-320 flex-col px-20 px-35"
       >
-        <h5 f-c-c text-24 mb-32 font-normal color="#6a6a6a">
+        <h5 color="#6a6a6a" class="dark:color-[#fff] f-c-c text-24 mb-32 font-normal">
           <img src="/resource/logo.png" height="50" rounded-10 class="mr-10" />
           {{ VITE_APP_NAME }}
         </h5>
