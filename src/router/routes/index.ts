@@ -4,10 +4,17 @@ import { RouteRecordRaw } from 'vue-router';
 export const baseRoutes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('@/views/index/index.vue'),
-    meta: {
-      title: '首页',
-    },
+    component: () => import('@/layout/index.vue'),
+    redirect: '/index',
+    children: [
+      {
+        path: '/index',
+        component: () => import('@/views/index/index.vue'),
+        meta: {
+          title: '首页',
+        },
+      },
+    ],
   },
   {
     path: '/login',
