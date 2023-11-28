@@ -6,9 +6,13 @@ export const useAppStore = defineStore('app', {
   state() {
     return {
       isDark,
+      isCollapsed: false,
     };
   },
   actions: {
+    toggleCollapsed() {
+      this.isCollapsed = !this.isCollapsed;
+    },
     toggleTheme() {
       this.isDark = !this.isDark;
     },
