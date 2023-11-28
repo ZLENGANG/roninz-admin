@@ -1,7 +1,7 @@
 <template>
   <n-dropdown :options="options" @select="handleSelect">
     <div class="flex items-center cursor-pointer">
-      <n-avatar class="mr10 h-35 w-35 rounded-full" round size="small" src="/favicon.png" />
+      <n-avatar class="mr10 h-35 w-35 rounded-full" round size="small" src="./favicon.png" />
       <span>Roninz(admin)</span>
     </div>
   </n-dropdown>
