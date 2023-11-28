@@ -9,6 +9,9 @@
 
 <script setup lang="ts">
 import { lStorage } from '@/utils';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
 const options = [
   {
     label: '退出登录',
@@ -26,7 +29,7 @@ const handleSelect = (key: string | number): void => {
       onPositiveClick() {
         lStorage.remove('token');
         window.$message?.success('已退出登录');
-        window.location.href = '/';
+        router.push('/login');
       },
     });
   }
