@@ -4,4 +4,8 @@ export declare module 'vue-router' {
     noNeedLogin?: boolean;
     icon?: string;
   }
+
+  interface RouteRecordSingleViewWithChildren {
+    children?: RouteRecordRaw[];
+  }
 }

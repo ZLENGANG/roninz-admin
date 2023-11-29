@@ -13,6 +13,7 @@ declare module 'vue' {
     IconEpAvatar: typeof import('~icons/ep/avatar')['default']
     IconEpExpand: typeof import('~icons/ep/expand')['default']
     IconEpFold: typeof import('~icons/ep/fold')['default']
+    IconEpFullScreen: typeof import('~icons/ep/full-screen')['default']
     IconEpHomeFilled: typeof import('~icons/ep/home-filled')['default']
     IconEpLock: typeof import('~icons/ep/lock')['default']
     IconEpMoon: typeof import('~icons/ep/moon')['default']

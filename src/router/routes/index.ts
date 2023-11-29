@@ -6,11 +6,11 @@ export const baseRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: 'index',
+    redirect: '/index',
     children: [
       {
         name: 'index',
-        path: 'index',
+        path: '/index',
         component: () => import('@/views/index/index.vue'),
         meta: {
           title: '首页',
@@ -19,15 +19,16 @@ export const baseRoutes: RouteRecordRaw[] = [
       },
       {
         name: 'user',
-        path: 'user',
+        path: '/user',
         meta: {
           title: '用户管理',
           icon: 'ep:avatar',
         },
+        redirect: '/user/list',
         children: [
           {
             name: 'user-list',
-            path: 'list',
+            path: '/user/list',
             component: () => import('@/views/user/index.vue'),
             meta: {
               title: '用户列表',
@@ -36,7 +37,7 @@ export const baseRoutes: RouteRecordRaw[] = [
           },
           {
             name: 'user-role',
-            path: 'role',
+            path: '/user/role',
             component: () => import('@/views/user/role.vue'),
             meta: {
               title: '角色列表',
@@ -45,26 +46,24 @@ export const baseRoutes: RouteRecordRaw[] = [
           },
         ],
       },
-      // {
-      //   name: 'ExternalLink',
-      //   path: '/external-link',
-      //   component: Layout,
-      //   meta: {
-      //     title: '外部链接',
-      //     icon: 'mdi:link-variant',
-      //   },
-      //   children: [
-      //     {
-      //       redirect: '/index',
-      //       name: 'LinkGithubSrc',
-      //       path: 'https://github.com/zclzone/vue-naive-admin',
-      //       meta: {
-      //         title: '源码 - github',
-      //         icon: 'mdi:github',
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        name: 'external-link',
+        path: '/external-link',
+        meta: {
+          title: '外部链接',
+          icon: 'mdi:link-variant',
+        },
+        children: [
+          {
+            name: 'LinkGithubSrc',
+            path: 'https://github.com/zclzone/vue-naive-admin',
+            meta: {
+              title: '源码 - github',
+              icon: 'mdi:github',
+            },
+          },
+        ],
+      },
     ],
   },
   {
