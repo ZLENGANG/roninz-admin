@@ -50,7 +50,12 @@ const getMenu = (routes: RouteRecordRaw[]): MenuOption[] => {
 const menuOptions = getMenu(routes);
 
 const handleMenuSelect = (_path: string, item: MenuOptionRoute) => {
-  router.push({ name: item.route?.name });
+  const path = item.route?.path;
+  if (path && path.indexOf('http') > -1) {
+    window.open(path, '_blank');
+  } else {
+    router.push({ name: item.route?.name });
+  }
 };
 </script>
 
