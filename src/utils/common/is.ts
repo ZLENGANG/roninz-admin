@@ -18,3 +18,7 @@ export function isNullOrUndef(val: any): boolean {
 export function isNullOrWhitespace(val: any): boolean {
   return isNullOrUndef(val) || isWhitespace(val);
 }
+
+export function isExternal(path: string): boolean {
+  return /^(https?:|mailto:|tel:)/.test(path);
+}

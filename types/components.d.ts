@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppIframe: typeof import('./../src/components/common/app-iframe.vue')['default']
     AppPage: typeof import('./../src/components/common/app-page.vue')['default']
     'IconAntDesign:fullscreenExitOutlined': typeof import('~icons/ant-design/fullscreen-exit-outlined')['default']
     'IconAntDesign:fullscreenOutlined': typeof import('~icons/ant-design/fullscreen-outlined')['default']
@@ -33,6 +34,7 @@ declare module 'vue' {
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
+    NMenu: typeof import('naive-ui')['NMenu']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ThemeWarp: typeof import('./../src/components/common/theme-warp.vue')['default']

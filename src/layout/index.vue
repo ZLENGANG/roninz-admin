@@ -20,7 +20,7 @@
         <app-tags />
       </section>
 
-      <n-layout-content>
+      <n-layout-content class="p-15 bg-hex-f5f6fb dark:bg-hex-101014">
         <app-main />
       </n-layout-content>
     </n-layout>
@@ -39,5 +39,8 @@ const appStore = useAppStore();
 <style lang="scss" scoped>
 .n-layout-content {
   height: calc(100% - 60px - 50px);
+  ::v-deep .n-layout-scroll-container {
+    overflow-x: unset !important;
+  }
 }
 </style>
