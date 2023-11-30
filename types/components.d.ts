@@ -7,13 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppIframe: typeof import('./../src/components/common/app-iframe.vue')['default']
     AppPage: typeof import('./../src/components/common/app-page.vue')['default']
     'IconAntDesign:fullscreenExitOutlined': typeof import('~icons/ant-design/fullscreen-exit-outlined')['default']
     'IconAntDesign:fullscreenOutlined': typeof import('~icons/ant-design/fullscreen-outlined')['default']
     IconEpAvatar: typeof import('~icons/ep/avatar')['default']
     IconEpExpand: typeof import('~icons/ep/expand')['default']
     IconEpFold: typeof import('~icons/ep/fold')['default']
-    IconEpFullScreen: typeof import('~icons/ep/full-screen')['default']
     IconEpHomeFilled: typeof import('~icons/ep/home-filled')['default']
     IconEpLock: typeof import('~icons/ep/lock')['default']
     IconEpMoon: typeof import('~icons/ep/moon')['default']

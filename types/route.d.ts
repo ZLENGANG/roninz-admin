@@ -3,6 +3,7 @@ export declare module 'vue-router' {
     title: string;
     noNeedLogin?: boolean;
     icon?: string;
+    innerLink?: string;
   }
 
   interface RouteRecordSingleViewWithChildren {

@@ -15,6 +15,7 @@
 import { renderIcon } from '@/utils/common/icon';
 import { MenuOption } from 'naive-ui';
 import { useRouter, useRoute, RouteRecordRaw } from 'vue-router';
+import { isExternal } from '@/utils';
 
 type MenuOptionRoute = MenuOption & {
   route?: RouteRecordRaw;
@@ -51,7 +52,7 @@ const menuOptions = getMenu(routes);
 
 const handleMenuSelect = (_path: string, item: MenuOptionRoute) => {
   const path = item.route?.path;
-  if (path && path.indexOf('http') > -1) {
+  if (path && isExternal(path)) {
     window.open(path, '_blank');
   } else {
     router.push({ name: item.route?.name });
@@ -61,7 +62,7 @@ const handleMenuSelect = (_path: string, item: MenuOptionRoute) => {
 
 <style lang="scss" scoped>
 .side-menu:not(.n-menu--collapsed) {
-  ::v-deep .n-menu-item-content {
+  :v-deep(.n-menu-item-content) {
     &::before {
       left: 5px;
       right: 5px;

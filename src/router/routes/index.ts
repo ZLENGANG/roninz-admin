@@ -64,6 +64,27 @@ export const baseRoutes: RouteRecordRaw[] = [
           },
         ],
       },
+
+      {
+        name: 'inner-link',
+        path: '/inner-link',
+        meta: {
+          title: '内嵌链接',
+          icon: 'mdi:link-variant',
+        },
+        children: [
+          {
+            name: 'inner-link-vue',
+            path: '/inner-link/vue',
+            meta: {
+              title: 'vue',
+              icon: 'mdi:vuejs',
+              innerLink: 'https://cn.vuejs.org/',
+            },
+            component: () => import('@/components/common/app-iframe.vue'),
+          },
+        ],
+      },
     ],
   },
   {
