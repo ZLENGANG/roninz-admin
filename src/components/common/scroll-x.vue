@@ -1,18 +1,18 @@
 <template>
-  <div ref="wrapperRef" class="wrapper" @mousewheel.passive="handleMouseWheel">
-    <template v-if="isShowArrow">
-      <div class="left dark:bg-dark!">
+  <div ref="wrapper" class="wrapper h-full" @mousewheel.passive="handleMouseWheel">
+    <template v-if="showArrow && isOverflow">
+      <div class="left dark:bg-dark!" @click="handleMouseWheel({ wheelDelta: 120 } as MouseWheelEvent)">
         <icon-ic:baseline-keyboard-arrow-left />
       </div>
-      <div class="right dark:bg-dark!">
+      <div class="right dark:bg-dark!" @click="handleMouseWheel({ wheelDelta: -120 } as MouseWheelEvent)">
         <icon-ic:baseline-keyboard-arrow-right />
       </div>
     </template>
 
     <div
-      ref="contentRef"
+      ref="content"
       class="content"
-      :class="{ overflow: isShowArrow }"
+      :class="{ overflow: isOverflow && showArrow }"
       :style="{
         transform: `translateX(${translateX}px)`,
       }"
@@ -23,60 +23,98 @@
 </template>
 
 <script setup lang="ts">
+import { useResize } from '@/utils';
+import { debounce } from 'lodash-es';
+
 interface MouseWheelEvent extends WheelEvent {
   wheelDelta?: number;
 }
 
-const wrapperRef = ref<HTMLElement>();
-const contentRef = ref<HTMLElement>();
-const isShowArrow = ref(false);
+defineProps({
+  showArrow: {
+    type: Boolean,
+    default: true,
+  },
+});
+
 const translateX = ref(0);
+const content = ref<HTMLElement>();
+const wrapper = ref<HTMLElement>();
+const isOverflow = ref(false);
+const observers = ref<ResizeObserver[]>([]);
 
-const handleMouseWheel = (e: MouseWheelEvent) => {
+// 加载完dom后刷新是否溢出
+onMounted(() => {
+  refreshIsOverflow();
+
+  observers.value.push(useResize(document.body, refreshIsOverflow));
+  observers.value.push(useResize(content.value as HTMLElement, refreshIsOverflow));
+});
+
+// 获取容器的宽度和内容的宽度
+const getWidth = () => {
+  return {
+    wrapperWidth: wrapper.value?.offsetWidth || 0,
+    contentWidth: content.value?.offsetWidth || 0,
+  };
+};
+
+// 刷新是否溢出
+const refreshIsOverflow = debounce(() => {
   const { wrapperWidth, contentWidth } = getWidth();
+  isOverflow.value = contentWidth > wrapperWidth;
+  resetTranslateX(wrapperWidth, contentWidth);
+}, 200);
+
+// 鼠标滚轮移动事件和点击箭头事件
+const handleMouseWheel = (e: MouseWheelEvent) => {
   const { wheelDelta = 0 } = e;
-  console.log(wrapperWidth, contentWidth, wheelDelta, translateX.value);
-
+  const { wrapperWidth, contentWidth } = getWidth();
+  /**
+   * @wheelDelta 平行滚动的值 >0： 右移  <0: 左移
+   * @translateX 内容translateX的值
+   * @wrapperWidth 容器的宽度
+   * @contentWidth 内容的宽度
+   */
   if (wheelDelta < 0) {
-    if (contentWidth + translateX.value <= wrapperWidth) {
-      return;
-    }
+    if (wrapperWidth > contentWidth && translateX.value < -10) return;
+    if (wrapperWidth <= contentWidth && contentWidth + translateX.value - wrapperWidth < -10) return;
   }
-
-  if (wheelDelta > 0 && translateX.value >= 0) {
+  if (wheelDelta > 0 && translateX.value > 10) {
     return;
   }
 
   translateX.value += wheelDelta;
+  resetTranslateX(wrapperWidth, contentWidth);
 };
 
-const handleArrowVisable = () => {
-  const { wrapperWidth, contentWidth } = getWidth();
-  isShowArrow.value = contentWidth > wrapperWidth;
-};
+// 重置偏移量
+const resetTranslateX = debounce(function (wrapperWidth, contentWidth) {
+  if (!isOverflow.value) {
+    translateX.value = 0;
+  } else if (-translateX.value > contentWidth - wrapperWidth) {
+    translateX.value = wrapperWidth - contentWidth;
+  } else if (translateX.value > 0) {
+    translateX.value = 0;
+  }
+}, 200);
 
-const getWidth = () => {
-  return {
-    wrapperWidth: wrapperRef.value?.offsetWidth || 0,
-    contentWidth: contentRef.value?.offsetWidth || 0,
-  };
-};
-
-onMounted(() => {
-  handleArrowVisable();
+// 组件销毁前移除监听
+onBeforeUnmount(() => {
+  observers.value.forEach((item) => {
+    item?.disconnect();
+  });
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .wrapper {
-  height: 100%;
   display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
+  background-color: #fff;
 
+  z-index: 9;
   overflow: hidden;
   position: relative;
-
   .content {
     padding: 0 10px;
     display: flex;
@@ -88,7 +126,6 @@ onMounted(() => {
       padding-right: 30px;
     }
   }
-
   .left,
   .right {
     background-color: #fff;
@@ -110,7 +147,6 @@ onMounted(() => {
     z-index: 2;
     cursor: pointer;
   }
-
   .left {
     left: 0;
   }
