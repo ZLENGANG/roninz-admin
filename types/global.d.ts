@@ -7,4 +7,6 @@ declare global {
     $message?: MessageProviderInst;
     $notification?: NotificationProviderInst;
   }
+
+  interface RouteTag extends Pick<RouteLocationNormalizedLoaded, 'meta' | 'path'> {}
 }

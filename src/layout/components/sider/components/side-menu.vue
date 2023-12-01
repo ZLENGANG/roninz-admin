@@ -1,5 +1,6 @@
 <template>
   <n-menu
+    ref="menuRef"
     accordion
     :options="menuOptions"
     :indent="18"
@@ -13,7 +14,7 @@
 
 <script lang="ts" setup>
 import { renderIcon } from '@/utils/common/icon';
-import { MenuOption } from 'naive-ui';
+import { MenuInst, MenuOption } from 'naive-ui';
 import { useRouter, useRoute, RouteRecordRaw } from 'vue-router';
 import { isExternal } from '@/utils';
 
@@ -24,9 +25,17 @@ type MenuOptionRoute = MenuOption & {
 const router = useRouter();
 const routes = router.options.routes[0].children || [];
 const curRoute = useRoute();
-
+const menuRef = ref<MenuInst>();
 const activeKey = computed(() => curRoute.name as string);
 
+// 展开子菜单所在的上级菜单
+watch(curRoute, async () => {
+  nextTick(() => {
+    menuRef.value?.showOption();
+  });
+});
+
+// 获取菜单
 const getMenu = (routes: RouteRecordRaw[]): MenuOption[] => {
   const result: MenuOption[] = [];
 
