@@ -99,6 +99,28 @@ const resetTranslateX = debounce(function (wrapperWidth, contentWidth) {
   }
 }, 200);
 
+function handleScroll(x: number, width: number) {
+  const { wrapperWidth, contentWidth } = getWidth();
+
+  if (contentWidth <= wrapperWidth) return;
+
+  // 当 x 小于可视范围的最小值时
+  if (x < -translateX.value + 150) {
+    translateX.value = -(x - 150);
+    resetTranslateX(wrapperWidth, contentWidth);
+  }
+
+  // 当 x 大于可视范围的最大值时
+  if (x + width > -translateX.value + wrapperWidth) {
+    translateX.value = wrapperWidth - (x + width);
+    resetTranslateX(wrapperWidth, contentWidth);
+  }
+}
+
+defineExpose({
+  handleScroll,
+});
+
 // 组件销毁前移除监听
 onBeforeUnmount(() => {
   observers.value.forEach((item) => {
