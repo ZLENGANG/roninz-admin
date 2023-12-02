@@ -7,7 +7,7 @@ interface TagsState {
   activeTag: string; // 当前选中标签
 }
 
-export const usetTagsStore = defineStore('tags', {
+export const useTagsStore = defineStore('tags', {
   state: (): TagsState => ({
     tags: tags || [],
     activeTag: activeTag || '',
