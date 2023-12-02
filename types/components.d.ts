@@ -14,10 +14,11 @@ declare module 'vue' {
     IconEpAvatar: typeof import('~icons/ep/avatar')['default']
     IconEpExpand: typeof import('~icons/ep/expand')['default']
     IconEpFold: typeof import('~icons/ep/fold')['default']
-    IconEpHomeFilled: typeof import('~icons/ep/home-filled')['default']
     IconEpLock: typeof import('~icons/ep/lock')['default']
     IconEpMoon: typeof import('~icons/ep/moon')['default']
     IconEpSunny: typeof import('~icons/ep/sunny')['default']
+    'IconIc:baselineKeyboardArrowLeft': typeof import('~icons/ic/baseline-keyboard-arrow-left')['default']
+    'IconIc:baselineKeyboardArrowRight': typeof import('~icons/ic/baseline-keyboard-arrow-right')['default']
     Loading: typeof import('./../src/components/loading/index.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
@@ -35,8 +36,10 @@ declare module 'vue' {
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NMenu: typeof import('naive-ui')['NMenu']
+    NTag: typeof import('naive-ui')['NTag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScrollX: typeof import('./../src/components/common/scroll-x.vue')['default']
     ThemeWarp: typeof import('./../src/components/common/theme-warp.vue')['default']
   }
 }

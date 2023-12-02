@@ -3,7 +3,7 @@ import { baseRoutes } from './routes';
 import { setupRouterGuard } from './guard';
 import { App } from 'vue';
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHashHistory(),
   routes: baseRoutes,
 });
