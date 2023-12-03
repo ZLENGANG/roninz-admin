@@ -6,7 +6,7 @@ export const createPagePermissionGuard = (router: Router): void => {
     const token = getToken();
     if (isNullOrWhitespace(token)) {
       if (to.meta.noNeedLogin) return true;
-      return { path: 'login', query: { ...to.query, redirect: to.path } };
+      return { path: '/login', query: { ...to.query, redirect: to.path } };
     }
 
     /** 有token的情况 */
