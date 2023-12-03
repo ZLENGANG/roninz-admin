@@ -1,5 +1,5 @@
 <template>
-  <scroll-x ref="scrollXRef">
+  <scroll-x ref="scrollXRef" class="bg-white dark:bg-dark!">
     <n-tag
       v-for="tag in tags"
       ref="tagsRef"
@@ -45,10 +45,11 @@ const contextMenuOption = ref({
 watch(
   () => route.path,
   () => {
-    const { path, meta } = route;
+    const { path, meta, name } = route;
     tagsStore.addTag({
       path,
       meta,
+      name,
     });
   },
   { immediate: true },

@@ -27,12 +27,13 @@ export const baseRoutes: RouteRecordRaw[] = [
         redirect: '/user/list',
         children: [
           {
-            name: 'user-list',
+            name: 'UserList',
             path: '/user/list',
             component: () => import('@/views/user/index.vue'),
             meta: {
               title: '用户列表',
               icon: 'ep:avatar',
+              keepAlive: true,
             },
           },
           {

@@ -8,5 +8,5 @@ declare global {
     $notification?: NotificationProviderInst;
   }
 
-  interface RouteTag extends Pick<RouteLocationNormalizedLoaded, 'meta' | 'path'> {}
+  interface RouteTag extends Pick<RouteLocationNormalizedLoaded, 'meta' | 'path' | 'name'> {}
 }

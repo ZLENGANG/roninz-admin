@@ -74,6 +74,7 @@ const loginInfo = ref({
 });
 const isRemember = ref(false);
 const router = useRouter();
+const { query } = useRoute();
 const loading = ref(false);
 const { VITE_APP_NAME } = import.meta.env;
 const loginRules = {
@@ -107,6 +108,12 @@ const setLoginInfo = () => {
 };
 
 const jump = () => {
+  const path = query?.redirect as string;
+  if (path) {
+    Reflect.deleteProperty(query, 'redirect');
+    router.push({ path, query });
+    return;
+  }
   router.push('/');
 };
 

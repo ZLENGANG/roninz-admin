@@ -77,7 +77,9 @@ const onClickoutside = () => {
 };
 
 const handleSelect = (key: string) => {
-  console.log(key);
+  if (key === 'reload') {
+    tagsStore.reloadTag();
+  }
   hideDropdown();
 };
 </script>
