@@ -1,5 +1,5 @@
 <template>
-  <scroll-x ref="scrollXRef">
+  <scroll-x ref="scrollXRef" class="bg-white dark:bg-dark!">
     <n-tag
       v-for="tag in tags"
       ref="tagsRef"
@@ -9,6 +9,7 @@
       :type="tag.path === route.path ? 'primary' : 'default'"
       @click="handleTagClick(tag)"
       @close="handleCloseTag(tag)"
+      @contextmenu.prevent="handleContextMenu($event, tag)"
     >
       {{ tag.meta.title }}
       <template #icon>
@@ -16,28 +17,39 @@
       </template>
     </n-tag>
   </scroll-x>
+
+  <context-menu v-bind="contextMenuOption" v-model:visible="contextMenuOption.visible" />
 </template>
 
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router';
-import { usetTagsStore } from '@/store';
+import { useTagsStore } from '@/store';
 import { renderIcon } from '@/utils';
 import { TagRef } from 'naive-ui/es/tag/src/Tag';
+import ContextMenu from './context-menu.vue';
 
 const route = useRoute();
 const router = useRouter();
-const tagsStore = usetTagsStore();
+const tagsStore = useTagsStore();
 const tags = computed(() => tagsStore.tags);
 const tagsRef = ref<TagRef[]>();
 const scrollXRef = ref<ScrollXRef>();
 
+const contextMenuOption = ref({
+  x: 0,
+  y: 0,
+  visible: false,
+  curPath: '',
+});
+
 watch(
   () => route.path,
   () => {
-    const { path, meta } = route;
+    const { path, meta, name } = route;
     tagsStore.addTag({
       path,
       meta,
+      name,
     });
   },
   { immediate: true },
@@ -48,7 +60,6 @@ watch(
   (index) => {
     nextTick(() => {
       const activeElement = tagsRef.value?.[index]?.$el;
-      console.dir(activeElement);
       if (!activeElement) {
         return;
       }
@@ -67,6 +78,15 @@ const handleTagClick = (tag: RouteTag) => {
 
 const handleCloseTag = (tag: RouteTag) => {
   tagsStore.removeTag(tag);
+};
+
+const handleContextMenu = (e: MouseEvent, tag: RouteTag) => {
+  contextMenuOption.value = {
+    x: e.clientX,
+    y: e.clientY,
+    curPath: tag.path,
+    visible: true,
+  };
 };
 </script>
 

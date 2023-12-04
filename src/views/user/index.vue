@@ -1,7 +1,14 @@
 <template>
-  <div>用户列表</div>
+  <div>
+    <n-input v-model:value="value"></n-input>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const value = ref('');
+defineOptions({
+  name: 'UserList',
+});
+</script>
 
 <style scoped></style>
