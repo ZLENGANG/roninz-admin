@@ -1,5 +1,5 @@
 import { sStorage } from '@/utils';
 
-export const activeTag = sStorage.get('activeTag');
+export const activeTagPath = sStorage.get('activeTagPath');
 
 export const tags = sStorage.get('tags');

@@ -32,14 +32,14 @@ const props = withDefaults(defineProps<ContextMenuProps>(), {
 });
 
 const emit = defineEmits(['update:visible']);
-
 const tagsStore = useTagsStore();
+const route = useRoute();
 
 const options = computed<DropdownOption[]>(() => [
   {
     label: '重新加载',
     key: 'reload',
-    disabled: props.curPath !== tagsStore.activeTag,
+    disabled: props.curPath !== tagsStore.activeTagPath,
     icon: renderIcon('mdi:refresh', { size: 18 }),
   },
   {
@@ -68,6 +68,44 @@ const options = computed<DropdownOption[]>(() => [
   },
 ]);
 
+const actionMap = new Map([
+  [
+    'reload',
+    () => {
+      console.log(route);
+      tagsStore.reloadTag(route);
+    },
+  ],
+
+  [
+    'close',
+    () => {
+      tagsStore.removeTag({ path: props.curPath });
+    },
+  ],
+
+  [
+    'close-other',
+    () => {
+      tagsStore.closeOtherTags(props.curPath);
+    },
+  ],
+
+  [
+    'close-left',
+    () => {
+      tagsStore.closeLeftTags(props.curPath);
+    },
+  ],
+
+  [
+    'close-right',
+    () => {
+      tagsStore.closeRightTags(props.curPath);
+    },
+  ],
+]);
+
 const hideDropdown = () => {
   emit('update:visible', false);
 };
@@ -77,9 +115,8 @@ const onClickoutside = () => {
 };
 
 const handleSelect = (key: string) => {
-  if (key === 'reload') {
-    tagsStore.reloadTag();
-  }
+  const actionFn = actionMap.get(key);
+  actionFn && actionFn();
   hideDropdown();
 };
 </script>
