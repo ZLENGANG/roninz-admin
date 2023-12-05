@@ -18,6 +18,15 @@ export const baseRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'stock',
+        path: '/stock',
+        component: () => import('@/views/stock/index.vue'),
+        meta: {
+          title: '随机股票',
+          icon: 'ant-design:stock-outlined',
+        },
+      },
+      {
         name: 'user',
         path: '/user',
         meta: {
@@ -94,13 +103,6 @@ export const baseRoutes: RouteRecordRaw[] = [
     meta: {
       title: '登录',
       noNeedLogin: true,
-    },
-  },
-  {
-    path: '/stock',
-    component: () => import('@/views/stock/index.vue'),
-    meta: {
-      title: '随机股票',
     },
   },
 ];
