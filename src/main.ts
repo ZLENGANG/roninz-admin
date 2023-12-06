@@ -11,7 +11,7 @@ import { setupNaiveDiscreteApi } from './utils';
 const app = createApp(App);
 
 setupNaiveDiscreteApi();
-setupRouter(app);
 setupStore(app);
+setupRouter(app);
 
 app.mount('#app');

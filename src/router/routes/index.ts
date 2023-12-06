@@ -4,6 +4,7 @@ import Layout from '@/layout/index.vue';
 
 export const baseRoutes: RouteRecordRaw[] = [
   {
+    name: 'main',
     path: '/',
     component: Layout,
     redirect: '/index',
@@ -15,6 +16,15 @@ export const baseRoutes: RouteRecordRaw[] = [
         meta: {
           title: '首页',
           icon: 'ep:home-filled',
+        },
+      },
+      {
+        name: 'stock',
+        path: '/stock',
+        component: () => import('@/views/stock/index.vue'),
+        meta: {
+          title: '随机股票',
+          icon: 'ant-design:stock-outlined',
         },
       },
       {
@@ -97,10 +107,12 @@ export const baseRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/stock',
-    component: () => import('@/views/stock/index.vue'),
+    name: '404',
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/error-page/404.vue'),
     meta: {
-      title: '随机股票',
+      title: '404',
+      noNeedLogin: true,
     },
   },
 ];
