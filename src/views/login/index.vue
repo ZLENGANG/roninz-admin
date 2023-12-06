@@ -66,6 +66,7 @@
 import { login } from '@/service';
 import { lStorage, setToken } from '@/utils';
 import bgImg from '@/assets/images/login_bg.webp';
+import { useUserStore } from '@/store';
 import { FormInst } from 'naive-ui';
 
 const loginInfo = ref({
@@ -90,6 +91,8 @@ const loginRules = {
   },
 };
 const loginFormRef = ref<FormInst | null>(null);
+
+useUserStore().getUserInfo();
 
 const initLoginInfo = () => {
   const info = lStorage.get('loginInfo');
