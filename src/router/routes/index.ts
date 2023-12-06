@@ -4,6 +4,7 @@ import Layout from '@/layout/index.vue';
 
 export const baseRoutes: RouteRecordRaw[] = [
   {
+    name: 'main',
     path: '/',
     component: Layout,
     redirect: '/index',
@@ -102,6 +103,15 @@ export const baseRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/login/index.vue'),
     meta: {
       title: '登录',
+      noNeedLogin: true,
+    },
+  },
+  {
+    name: '404',
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/error-page/404.vue'),
+    meta: {
+      title: '404',
       noNeedLogin: true,
     },
   },
