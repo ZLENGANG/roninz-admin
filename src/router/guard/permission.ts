@@ -4,6 +4,7 @@ import { getToken, isNullOrWhitespace, refreshToken } from '@/utils';
 export const createPagePermissionGuard = (router: Router): void => {
   router.beforeEach((to) => {
     const token = getToken();
+
     if (isNullOrWhitespace(token)) {
       if (to.meta.noNeedLogin) return true;
       return { path: '/login', query: { ...to.query, redirect: to.path } };

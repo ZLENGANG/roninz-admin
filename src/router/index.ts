@@ -2,8 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import { baseRoutes } from './routes';
 import { setupRouterGuard } from './guard';
 import { App } from 'vue';
-import { getToken, isNullOrWhitespace } from '@/utils';
-import { usePermission, useUserStore } from '@/store';
+import { useAuthStore, useUserStore, usePermissionStore } from '@/store';
 
 export const router = createRouter({
   history: createWebHashHistory(),
@@ -11,22 +10,24 @@ export const router = createRouter({
 });
 
 export async function setupRouter(app: App) {
-  addDynamicRoutes();
+  try {
+    await initUserAndPermissions();
+  } catch (error) {
+    console.error('🚀 初始化失败', error);
+  }
   setupRouterGuard(router);
   app.use(router);
 }
 
-const addDynamicRoutes = async () => {
-  const token = getToken();
-  if (isNullOrWhitespace(token)) {
+export async function initUserAndPermissions() {
+  const authStore = useAuthStore();
+  const userStore = useUserStore();
+  const permissionStore = usePermissionStore();
+
+  if (!authStore.accessToken) {
+    authStore.toLogin();
     return;
   }
 
-  try {
-    const userStore = useUserStore();
-    const permissionStore = usePermission();
-
-    !userStore.userId && (await userStore.getUserInfo());
-    const accessRoutes = permissionStore.generateRoutes(userStore.roles);
-  } catch (error) {}
-};
+  await Promise.all([userStore.getUserInfo(), permissionStore.initPermissions()]);
+}

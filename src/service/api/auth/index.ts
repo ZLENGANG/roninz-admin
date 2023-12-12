@@ -13,3 +13,7 @@ export const getUser = () => {
 export const resetToken = () => {
   return post(`${AUTH_PATH}/refreshToken`);
 };
+
+export const getRolePermissions = () => {
+  return post(`${AUTH_PATH}/getTreeRole`);
+};
