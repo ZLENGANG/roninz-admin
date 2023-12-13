@@ -30,7 +30,9 @@ export async function initUserAndPermissions() {
   }
 
   await Promise.all([userStore.getUserInfo(), permissionStore.initPermissions()]);
+
   permissionStore.accessRoutes.forEach((route) => {
-    router.hasRoute(route.name as RouteRecordName) && router.addRoute(route as RouteRecordRaw);
+    // 动态添加路由
+    !router.hasRoute(route.name as RouteRecordName) && router.addRoute(route as RouteRecordRaw);
   });
 }

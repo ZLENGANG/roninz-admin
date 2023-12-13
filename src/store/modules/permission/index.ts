@@ -1,6 +1,5 @@
 import { getRolePermissions } from '@/service';
 import { renderIcon } from '@/utils';
-import { MenuOption } from 'naive-ui';
 import { isExternal } from '@/utils';
 import { RouteRecordRaw } from 'vue-router';
 
@@ -18,16 +17,11 @@ interface RoleTree {
   component: string; // 组件路径
   layout: 'default' | 'empty'; // 布局类型
   keepAlive: boolean; // 是否缓存页面
-  // method: string;
-  // description: string;
   show: boolean; // 是否展示
   enable: boolean; // 是否启用
   order: number; // 顺序
   children: RoleTree[];
 }
-type NewMenuOption = MenuOption & {
-  order?: number;
-};
 
 interface PermissionState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -101,6 +95,10 @@ export const usePermissionStore = defineStore('permission', {
             .map((item) => ({ code: item.code, name: item.name })),
         },
       };
+    },
+
+    resetPermission() {
+      this.$reset();
     },
   },
 });

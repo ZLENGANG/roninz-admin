@@ -108,5 +108,10 @@ export const useTagsStore = defineStore('tags', {
         router.push(this.tags[this.tags.length - 1].path);
       }
     },
+
+    // 重置
+    resetTags() {
+      this.$reset();
+    },
   },
 });

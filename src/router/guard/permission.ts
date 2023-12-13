@@ -1,18 +1,30 @@
 import { Router } from 'vue-router';
-import { getToken, isNullOrWhitespace, refreshToken } from '@/utils';
+import { useAuthStore } from '@/store';
+
+const WHITE_LIST = ['/login', '/404'];
 
 export const createPagePermissionGuard = (router: Router): void => {
   router.beforeEach((to) => {
-    const token = getToken();
+    const authStore = useAuthStore();
+    const token = authStore.accessToken;
 
-    if (isNullOrWhitespace(token)) {
-      if (to.meta.noNeedLogin) return true;
+    // 没有token
+    if (!token) {
+      if (WHITE_LIST.includes(to.path)) return true;
       return { path: '/login', query: { ...to.query, redirect: to.path } };
     }
 
-    /** 有token的情况 */
+    // 有token
     if (to.path === '/login') return { path: '/' };
-    refreshToken();
-    return true;
+    if (WHITE_LIST.includes(to.path)) return true;
+
+    // 获取动态路由
+    const routes = router.getRoutes();
+    if (routes.find((route) => route.name === to.name)) return true;
+
+    // return hasMenu
+    //   ? { name: '403', query: { path: to.fullPath }, state: { from: 'permission-guard' } }
+    //   : { name: '404', query: { path: to.fullPath } };
+    return { name: '404', query: { path: to.fullPath } };
   });
 };

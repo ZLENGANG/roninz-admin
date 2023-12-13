@@ -21,7 +21,7 @@
       </section>
 
       <n-layout-content class="p-15 bg-hex-f5f6fb dark:bg-hex-101014">
-        <app-main />
+        <slot />
       </n-layout-content>
     </n-layout>
   </n-layout>
@@ -30,7 +30,6 @@
 <script lang="ts" setup>
 import AppSider from './components/sider/index.vue';
 import AppHeader from './components/header/index.vue';
-import AppMain from './components/main/index.vue';
 import AppTags from './components/tags/index.vue';
 import { useAppStore } from '@/store';
 const appStore = useAppStore();
