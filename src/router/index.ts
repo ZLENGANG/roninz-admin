@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { RouteRecordName, RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router';
 import { baseRoutes } from './routes';
 import { setupRouterGuard } from './guard';
 import { App } from 'vue';
@@ -30,4 +30,7 @@ export async function initUserAndPermissions() {
   }
 
   await Promise.all([userStore.getUserInfo(), permissionStore.initPermissions()]);
+  permissionStore.accessRoutes.forEach((route) => {
+    router.hasRoute(route.name as RouteRecordName) && router.addRoute(route as RouteRecordRaw);
+  });
 }
