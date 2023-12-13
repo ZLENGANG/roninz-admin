@@ -9,4 +9,9 @@ declare global {
   }
 
   interface RouteTag extends Pick<RouteLocationNormalizedLoaded, 'meta' | 'path' | 'name'> {}
+
+  type NewMenuOption = MenuOption & {
+    order?: number;
+    path?: string;
+  };
 }

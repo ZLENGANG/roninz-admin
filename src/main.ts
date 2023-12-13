@@ -12,6 +12,6 @@ const app = createApp(App);
 
 setupNaiveDiscreteApi();
 setupStore(app);
-setupRouter(app);
+await setupRouter(app);
 
 app.mount('#app');

@@ -42,5 +42,8 @@ export const useUserStore = defineStore('user', {
         return Promise.reject(error);
       }
     },
+    resetUser() {
+      this.$reset();
+    },
   },
 });

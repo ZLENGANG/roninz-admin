@@ -64,10 +64,11 @@
 
 <script lang="ts" setup>
 import { login } from '@/service';
-import { lStorage, setToken } from '@/utils';
+import { lStorage } from '@/utils';
 import bgImg from '@/assets/images/login_bg.webp';
-import { useUserStore } from '@/store';
 import { FormInst } from 'naive-ui';
+import { useAuthStore } from '@/store';
+import { initUserAndPermissions } from '@/router';
 
 const loginInfo = ref({
   name: '',
@@ -91,8 +92,7 @@ const loginRules = {
   },
 };
 const loginFormRef = ref<FormInst | null>(null);
-
-useUserStore().getUserInfo();
+const authStore = useAuthStore();
 
 const initLoginInfo = () => {
   const info = lStorage.get('loginInfo');
@@ -125,9 +125,10 @@ const handleLogin = () => {
     if (!valid) {
       loading.value = true;
       login(loginInfo.value)
-        .then((res) => {
-          setToken(res.data.token);
+        .then(async (res) => {
+          authStore.setToken(res.data.token);
           setLoginInfo();
+          await initUserAndPermissions();
           jump();
         })
         .finally(() => {
