@@ -1,27 +1,10 @@
 import { getRolePermissions } from '@/service';
 import { renderIcon } from '@/utils';
 import { isExternal } from '@/utils';
-import { RouteRecordRaw } from 'vue-router';
+import { RouteMeta, RouteRecordRaw } from 'vue-router';
+import { basePermissions } from './base';
 
 const routeComponents = import.meta.glob('@/views/**/*.vue');
-
-interface RoleTree {
-  id: number | string;
-  name: string; // 菜单名或按钮名
-  code: string; // 权限唯一标识
-  type: 'MENU' | 'BUTTON'; // 类型，菜单或按钮
-  parentId: number | string;
-  path: string; // 路由
-  redirect: string; // 重定向路径
-  icon: string; // 图标
-  component: string; // 组件路径
-  layout: 'default' | 'empty'; // 布局类型
-  keepAlive: boolean; // 是否缓存页面
-  show: boolean; // 是否展示
-  enable: boolean; // 是否启用
-  order: number; // 顺序
-  children: RoleTree[];
-}
 
 interface PermissionState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,7 +23,7 @@ export const usePermissionStore = defineStore('permission', {
   },
   getters: {
     permissions(): RoleTree[] {
-      return this.asyncPermissions || [];
+      return basePermissions.concat(this.asyncPermissions) || [];
     },
   },
   actions: {
@@ -56,16 +39,17 @@ export const usePermissionStore = defineStore('permission', {
 
     getMenuItem(item: RoleTree, parent?: NewMenuOption): NewMenuOption | null {
       const route = this.generateRoute(item, item.show ? undefined : parent?.key);
-      if (item.enable && route.path && !isExternal(route.path)) {
+      if (item.enable && route.path && (item.innerLink || !isExternal(route.path))) {
         this.accessRoutes.push(route);
       }
-      if (!item.show) return null;
+      if (!item.show || item.layout === 'empty') return null;
       const menuItem: NewMenuOption = {
         label: route.meta?.title,
         key: route.name as NewMenuOption['key'],
         path: route.path,
         icon: renderIcon(route.meta?.icon || ''),
         order: item.order ?? 0,
+        disabled: !item.enable,
       };
       const children = item.children?.filter((item) => item.type === 'MENU') || [];
       if (children.length) {
@@ -81,20 +65,32 @@ export const usePermissionStore = defineStore('permission', {
     generateRoute(item: RoleTree, parentKey?: NewMenuOption['key']): RouteRecordRaw {
       return {
         name: item.code,
-        path: item.path,
+        path: item.path || '',
         redirect: item.redirect,
-        component: routeComponents[item.component] || undefined,
+        component: this.getComponent(item),
         meta: {
           icon: item.icon,
-          title: item.name,
+          title: item.name || '',
           layout: item.layout || 'default',
           keepAlive: !!item.keepAlive,
           parentKey,
+          innerLink: item.innerLink,
           btns: item.children
             ?.filter((item) => item.type === 'BUTTON')
-            .map((item) => ({ code: item.code, name: item.name })),
+            .map((item) => ({ code: item.code, name: item.name })) as RouteMeta['btns'],
         },
       };
+    },
+
+    getComponent(item: RoleTree): Component | undefined {
+      if (item.innerLink) {
+        return markRaw(() => import(`@/components/common/app-iframe.vue`));
+      }
+      if (item.component) {
+        return routeComponents[item.component];
+      }
+
+      return undefined;
     },
 
     resetPermission() {

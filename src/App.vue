@@ -37,5 +37,4 @@ const { reloading, tags } = storeToRefs(tagsStore);
 const keepAliveNames = computed(() => {
   return tags.value.filter((item) => item.meta.keepAlive).map((item) => item.name);
 });
-console.log(keepAliveNames);
 </script>

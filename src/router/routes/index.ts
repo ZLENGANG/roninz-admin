@@ -1,4 +1,3 @@
-import '@/views/index/index.vue';
 import { RouteRecordRaw } from 'vue-router';
 
 export const baseRoutes: RouteRecordRaw[] = [
@@ -11,16 +10,6 @@ export const baseRoutes: RouteRecordRaw[] = [
       layout: 'empty',
     },
   },
-
-  // {
-  //   name: 'Home',
-  //   path: '/',
-  //   component: () => import('@/views/home/index.vue'),
-  //   meta: {
-  //     title: '首页',
-  //     icon: 'ep:home-filled',
-  //   },
-  // },
 
   {
     name: '404',
