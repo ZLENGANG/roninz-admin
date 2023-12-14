@@ -34,6 +34,7 @@ const menuOptions = usePermissionStore().menus;
 
 const handleMenuSelect = (_path: string, item: NewMenuOption) => {
   const path = item.path;
+
   if (path && isExternal(path)) {
     window.open(path, '_blank');
   } else {
