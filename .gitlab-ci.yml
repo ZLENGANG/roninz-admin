@@ -10,7 +10,7 @@ cache: # 缓存
 
 install-job:
   tags:
-    - vite-vue3-ts-pinia-1108
+    - roninz-admin
   stage: install
   script:
     - npm -v
@@ -23,7 +23,7 @@ install-job:
 
 build-job:
   tags:
-    - vite-vue3-ts-pinia-1108
+    - roninz-admin
   stage: build
   script:
     - npm run build:prod
@@ -32,7 +32,7 @@ build-job:
 
 deploy-job:
   tags:
-    - vite-vue3-ts-pinia-1108
+    - roninz-admin
   stage: deploy
   script:
     - echo $USER
@@ -42,7 +42,7 @@ deploy-job:
 
 dev-build-job:
   tags:
-    - vite-vue3-ts-pinia-1108
+    - roninz-admin
   stage: build
   script:
     - npm run build:dev
@@ -51,7 +51,7 @@ dev-build-job:
 
 dev-deploy-job:
   tags:
-    - vite-vue3-ts-pinia-1108
+    - roninz-admin
   stage: deploy
   script:
     - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/roninz-admin/dev
@@ -60,7 +60,7 @@ dev-deploy-job:
 
 uat-build-job:
   tags:
-    - vite-vue3-ts-pinia-1108
+    - roninz-admin
   stage: build
   script:
     - npm run build:uat
@@ -69,7 +69,7 @@ uat-build-job:
 
 uat-deploy-job:
   tags:
-    - vite-vue3-ts-pinia-1108
+    - roninz-admin
   stage: deploy
   script:
     - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/roninz-admin/uat
