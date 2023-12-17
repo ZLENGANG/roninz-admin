@@ -36,7 +36,7 @@ deploy-job:
   stage: deploy
   script:
     - echo $USER
-    - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/vite-vue3-ts-pinia/prod
+    - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/roninz-admin/prod
   only:
     - master
 
@@ -54,7 +54,7 @@ dev-deploy-job:
     - vite-vue3-ts-pinia-1108
   stage: deploy
   script:
-    - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/vite-vue3-ts-pinia/dev
+    - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/roninz-admin/dev
   only:
     - dev
 
@@ -72,6 +72,6 @@ uat-deploy-job:
     - vite-vue3-ts-pinia-1108
   stage: deploy
   script:
-    - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/vite-vue3-ts-pinia/uat
+    - sshpass -p $PASSWORD scp -r ./dist/* $CUSTOM_USERNAME@$CUSTOM_IP:/usr/local/nginx/html/roninz-admin/uat
   only:
     - uat
