@@ -13,17 +13,12 @@
 </template>
 
 <script lang="ts" setup>
-import { renderIcon } from '@/utils/common/icon';
-import { MenuInst, MenuOption } from 'naive-ui';
-import { useRouter, useRoute, RouteRecordRaw } from 'vue-router';
+import { MenuInst } from 'naive-ui';
+import { useRouter, useRoute } from 'vue-router';
 import { isExternal } from '@/utils';
-
-type MenuOptionRoute = MenuOption & {
-  route?: RouteRecordRaw;
-};
+import { usePermissionStore } from '@/store';
 
 const router = useRouter();
-const routes = router.options.routes[0].children || [];
 const curRoute = useRoute();
 const menuRef = ref<MenuInst>();
 const activeKey = computed(() => curRoute.name as string);
@@ -35,36 +30,15 @@ watch(curRoute, async () => {
   });
 });
 
-// 获取菜单
-const getMenu = (routes: RouteRecordRaw[]): MenuOption[] => {
-  const result: MenuOption[] = [];
+const menuOptions = usePermissionStore().menus;
 
-  routes.forEach((route) => {
-    const obj: MenuOption = {
-      route,
-      label: route.meta?.title,
-      key: route.name as string,
-      icon: renderIcon(route.meta?.icon || ''),
-    };
+const handleMenuSelect = (_path: string, item: NewMenuOption) => {
+  const path = item.path;
 
-    if (route.children) {
-      obj.children = getMenu(route.children);
-    }
-
-    result.push(obj);
-  });
-
-  return result;
-};
-
-const menuOptions = getMenu(routes);
-
-const handleMenuSelect = (_path: string, item: MenuOptionRoute) => {
-  const path = item.route?.path;
   if (path && isExternal(path)) {
     window.open(path, '_blank');
   } else {
-    router.push({ name: item.route?.name });
+    router.push(item.path);
   }
 };
 </script>

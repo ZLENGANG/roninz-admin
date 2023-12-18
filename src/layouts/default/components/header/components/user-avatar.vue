@@ -8,9 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import { lStorage } from '@/utils';
-import { useRouter } from 'vue-router';
-const router = useRouter();
+import { useAuthStore } from '@/store';
+const { logout } = useAuthStore();
 
 const options = [
   {
@@ -27,9 +26,7 @@ const handleSelect = (key: string | number): void => {
       positiveText: '确定',
       negativeText: '取消',
       onPositiveClick() {
-        lStorage.remove('token');
-        window.$message?.success('已退出登录');
-        router.push('/login');
+        logout();
       },
     });
   }

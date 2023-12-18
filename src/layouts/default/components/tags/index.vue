@@ -46,11 +46,13 @@ watch(
   () => route.path,
   () => {
     const { path, meta, name } = route;
-    tagsStore.addTag({
-      path,
-      meta,
-      name,
-    });
+    if (route.meta?.layout === 'default') {
+      tagsStore.addTag({
+        path,
+        meta,
+        name,
+      });
+    }
   },
   { immediate: true },
 );

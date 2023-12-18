@@ -5,6 +5,9 @@ export declare module 'vue-router' {
     icon?: string;
     innerLink?: string;
     keepAlive?: boolean;
+    layout?: 'default' | 'empty';
+    parentKey?: MenuOption['key'];
+    btns?: { code: string; name: string }[];
   }
 
   interface RouteRecordSingleViewWithChildren {
