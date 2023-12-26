@@ -1,8 +1,23 @@
-import { defineConfig, presetUno, presetAttributify } from 'unocss';
+import { defineConfig, presetUno, presetAttributify, presetIcons } from 'unocss';
 import presetRemToPx from '@unocss/preset-rem-to-px';
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders';
 
 export default defineConfig({
-  presets: [presetUno(), presetAttributify(), presetRemToPx({ baseFontSize: 4 })],
+  presets: [
+    presetUno(),
+    presetAttributify(),
+    presetRemToPx({ baseFontSize: 4 }),
+    presetIcons({
+      warn: true,
+      prefix: ['i-'],
+      extraProperties: {
+        display: 'inline-block',
+      },
+      collections: {
+        me: FileSystemIconLoader('./src/assets/icons/isme'),
+      },
+    }),
+  ],
   shortcuts: {
     'wh-full': 'w-full h-full',
     'f-c-c': 'flex justify-center items-center',
