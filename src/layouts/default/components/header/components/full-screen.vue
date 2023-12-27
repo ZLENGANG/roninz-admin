@@ -1,7 +1,7 @@
 <template>
   <n-icon size="18" class="mr-20 cursor-pointer" @click="toggle">
-    <icon-ant-design:fullscreen-exit-outlined v-if="isFullscreen" />
-    <icon-ant-design:fullscreen-outlined v-else />
+    <i v-if="isFullscreen" class="i-ot-fullscreen-exit-outlined" />
+    <i v-else class="i-ot-fullscreen-outlined" />
   </n-icon>
 </template>
 

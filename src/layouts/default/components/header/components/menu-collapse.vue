@@ -1,7 +1,7 @@
 <template>
   <n-icon size="20" class="cursor-pointer" @click="appStore.toggleCollapsed">
-    <icon-ep-expand v-if="appStore.isCollapsed" />
-    <icon-ep-fold v-else />
+    <i v-if="appStore.isCollapsed" class="i-ot-expand" />
+    <i v-else class="i-ot-fold" />
   </n-icon>
 </template>
 
