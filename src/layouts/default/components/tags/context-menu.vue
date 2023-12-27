@@ -40,31 +40,31 @@ const options = computed<DropdownOption[]>(() => [
     label: '重新加载',
     key: 'reload',
     disabled: props.curPath !== tagsStore.activeTagPath,
-    icon: renderIcon('mdi:refresh', { size: 18 }),
+    icon: renderIcon('i-cm-refresh', { size: 18 }),
   },
   {
     label: '关闭',
     key: 'close',
     disabled: tagsStore.tags.length <= 1,
-    icon: renderIcon('mdi:close', { size: 18 }),
+    icon: renderIcon('i-cm-close', { size: 18 }),
   },
   {
     label: '关闭其他',
     key: 'close-other',
     disabled: tagsStore.tags.length <= 1,
-    icon: renderIcon('mdi:arrow-expand-horizontal', { size: 14 }),
+    icon: renderIcon('i-cm-arrow-expand-horizontal', { size: 14 }),
   },
   {
     label: '关闭左侧',
     key: 'close-left',
     disabled: tagsStore.tags[0].path === props.curPath,
-    icon: renderIcon('mdi:arrow-expand-left', { size: 14 }),
+    icon: renderIcon('i-cm-arrow-expand-left', { size: 14 }),
   },
   {
     label: '关闭右侧',
     key: 'close-right',
     disabled: tagsStore.tags[tagsStore.tags.length - 1].path === props.curPath,
-    icon: renderIcon('mdi:arrow-expand-right', { size: 14 }),
+    icon: renderIcon('i-cm-arrow-expand-right', { size: 14 }),
   },
 ]);
 

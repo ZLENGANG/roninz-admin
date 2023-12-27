@@ -2,10 +2,10 @@
   <div ref="wrapper" class="wrapper h-full" @mousewheel.passive="handleMouseWheel">
     <template v-if="showArrow && isOverflow">
       <div class="left dark:bg-dark!" @click="handleMouseWheel({ wheelDelta: 120 } as MouseWheelEvent)">
-        <icon-ic:baseline-keyboard-arrow-left />
+        <i class="i-ot-arrow-left" />
       </div>
       <div class="right dark:bg-dark!" @click="handleMouseWheel({ wheelDelta: -120 } as MouseWheelEvent)">
-        <icon-ic:baseline-keyboard-arrow-right />
+        <i class="i-ot-arrow-right" />
       </div>
     </template>
 

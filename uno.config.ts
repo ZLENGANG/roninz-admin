@@ -1,6 +1,8 @@
 import { defineConfig, presetUno, presetAttributify, presetIcons } from 'unocss';
 import presetRemToPx from '@unocss/preset-rem-to-px';
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders';
+import { getIcons } from './build/plugins/icon';
+const icons = getIcons();
 
 export default defineConfig({
   presets: [
@@ -14,10 +16,13 @@ export default defineConfig({
         display: 'inline-block',
       },
       collections: {
-        me: FileSystemIconLoader('./src/assets/icons/isme'),
+        ot: FileSystemIconLoader('./src/assets/icons/other'),
+        menu: FileSystemIconLoader('./src/assets/icons/menu'),
+        cm: FileSystemIconLoader('./src/assets/icons/context-menu'),
       },
     }),
   ],
+  safelist: icons,
   shortcuts: {
     'wh-full': 'w-full h-full',
     'f-c-c': 'flex justify-center items-center',

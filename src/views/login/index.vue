@@ -26,7 +26,7 @@
           >
             <template #prefix>
               <n-icon mr-8>
-                <icon-ep-avatar class="text-20 opacity-40" />
+                <i class="text-20 opacity-40 i-ot-avatar" />
               </n-icon>
             </template>
           </n-input>
@@ -44,7 +44,7 @@
           >
             <template #prefix>
               <n-icon mr-8>
-                <icon-ep-lock class="text-20 opacity-40" />
+                <i class="text-20 opacity-40 i-ot-lock" />
               </n-icon>
             </template>
           </n-input>

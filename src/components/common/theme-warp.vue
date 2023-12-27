@@ -1,7 +1,7 @@
 <template>
   <div class="theme-warp card-shadow" @click="appStore.toggleTheme">
-    <icon-ep-sunny v-if="!appStore.isDark" text-20 />
-    <icon-ep-moon v-else text-20 />
+    <i v-if="!appStore.isDark" class="i-ot-moon" text-20></i>
+    <i v-else class="i-ot-sunny" text-20></i>
   </div>
 </template>
 
